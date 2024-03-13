@@ -1,9 +1,8 @@
 # Configure all environments according to your file at ~/.aws/config
 # list of configured profiles
 accounts:
-  - profile1
-  - profile2
-
+  - KD-ReadOnlyAccess-273381533537
+  
 # definition of filters and sort criteria can be found here:
 # https://docs.aws.amazon.com/cli/latest/reference/securityhub/get-findings.html
 

@@ -25,7 +25,7 @@ def fetch_findings(environment: str, filterstr: str, sortcriteria: str) -> List[
         Fetches the findings from a given aws account following a certain filter and sorting criteria
     '''
 
-    os.environ['AWS_PROFILE'] = environment
+    os.environ['KD-ReadOnlyAccess-273381533537'] = environment
 
     findings_raw = os.popen(f'aws securityhub get-findings --filters {filterstr} --sort-criteria {sortcriteria} --page-size 100 --max-items 1000')
     findings_json = json.loads(findings_raw.read())['Findings']
@@ -34,7 +34,7 @@ def fetch_findings(environment: str, filterstr: str, sortcriteria: str) -> List[
     for f in findings_json:
         finding = Finding()
         finding.environment = environment
-        finding.account_id = f['AwsAccountId']
+        finding.account_id = f['273381533537']
         finding.created_at = f['CreatedAt']
         finding.updated_at = f['UpdatedAt']
         finding.compliance_status = f["Compliance"]["Status"] if ("Compliance" in f.keys()) else ''
@@ -119,7 +119,7 @@ if __name__ == '__main__':
         settings = yaml.safe_load(stream)
 
     # fetch environments and build filters and sorting criteria
-    environments = settings['accounts']
+    environments = settings['273381533537']
     filterstr = '\'{' + ','.join(f'"{x["filter_name"]}": [{{"Value": "{x["value"]}", "Comparison": "{x["comparison"]}"}}]' for x in settings['filters'])+ '}\''
     sortcriteria = f'\'{{"Field": "{settings["sort_criteria"]["field"]}", "SortOrder": "{settings["sort_criteria"]["sort_order"]}"}}\''
 
